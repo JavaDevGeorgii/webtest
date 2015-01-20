@@ -10,9 +10,19 @@
         <servlet-class>com.levelup.webtest.MainServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>insert</servlet-name>
+        <servlet-class>com.levelup.webtest.RowInsertServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>main</servlet-name>
         <url-pattern>/query</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>insert</servlet-name>
+        <url-pattern>/insert</url-pattern>
     </servlet-mapping>
 
 

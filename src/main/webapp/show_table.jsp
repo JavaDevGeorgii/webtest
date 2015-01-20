@@ -7,6 +7,8 @@
 <%@ page import="java.sql.ResultSetMetaData" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.LinkedList" %>
+<%@ page import="com.levelup.webtest.dao.DatabaseUtilBean" %>
+<%@ page import="com.levelup.webtest.dao.ModelResult" %>
 <%--
   Created by IntelliJ IDEA.
   User: denis_zavadsky
@@ -33,28 +35,18 @@
 </form>
 <%
     } else {
+        DatabaseUtilBean dbUtilBean = new DatabaseUtilBean();
+        ModelResult result = dbUtilBean.selectFromTable(tableName);
+        session.setAttribute("result",result);
 
-        Context initContext = new InitialContext();
-        Context envContext = (Context) initContext.lookup("java:/comp/env");
-        //DataSource ds = (DataSource) initContext.lookup("java:/comp/env/jdbc/TestDB");
-        DataSource ds = (DataSource) envContext.lookup("jdbc/TestDB");
-        Connection connection = ds.getConnection();
-
-        String query = "SELECT * FROM "+tableName;
-
-        Statement stmt = connection.createStatement();
-        ResultSet rs =  stmt.executeQuery(query);
-
-        List<String> columns = new LinkedList<String>();
 %>
 <table>
     <thead>
 
 <%
-        ResultSetMetaData metaData = rs.getMetaData();
-        for (int i =1; i<=metaData.getColumnCount(); i++){
-            String columnName = metaData.getColumnName(i);
-            columns.add(columnName);
+    List<String> columns = result.getColumns();
+    for (int i=0; i<columns.size();i++){
+        String columnName = columns.get(i);
 %>
 <th><%= columnName%></th>
 <%
@@ -65,12 +57,14 @@
     <tbody>
 <%
 
-        while (rs.next()){
+    List<List<String>> rowList = result.getValues();
+    for (List<String> row : rowList){
+
 %>
 <tr>
 <%
-    for (int i=1; i<=columns.size(); i++){
-        String value = rs.getString(i);
+    for (String value : row){
+
 %>
     <td><%= value%></td>
 <%
@@ -79,9 +73,24 @@
 </tr>
 <%
         }
-    }
+
 %>
     </tbody>
 </table>
+
+<form action="insert" method="post">
+    <%
+        for (String columnName: columns){
+    %>
+    <%=columnName%>:<input type="text" name="<%=columnName%>">
+    <%
+        }
+    %>
+    <input type="submit">
+</form>
+<%
+
+    }
+%>
 </body>
 </html>
