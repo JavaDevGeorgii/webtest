@@ -19,11 +19,18 @@ public class RowInsertServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ModelResult result = (ModelResult) request.getSession().getAttribute("result");
+        boolean isError = false;
         if (result!=null){
             LinkedList<String> values = new LinkedList<String>();
             for (String columnName: result.getColumns()){
                 String value = request.getParameter(columnName);
+
                 if (!columnName.equalsIgnoreCase("id")){
+                    if (value==null || value.isEmpty()){
+                        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                        isError = true;
+                        break;
+                    }
                     values.add(value);
                 }
 
@@ -31,9 +38,12 @@ public class RowInsertServlet extends HttpServlet {
             List<String> columns = new LinkedList<String>();
             columns.addAll(result.getColumns());
             columns.remove("id");
-            DatabaseUtilBean dbUtilBean = new DatabaseUtilBean();
-            dbUtilBean.insertDataIntoTable(result.getTableName(), columns, values);
-            response.sendRedirect("show_table.jsp?table="+result.getTableName());
+            if (!isError) {
+                DatabaseUtilBean dbUtilBean = new DatabaseUtilBean();
+                dbUtilBean.insertDataIntoTable(result.getTableName(), columns, values);
+                response.setStatus(HttpServletResponse.SC_OK);
+            }
+            //response.sendRedirect("show_table.jsp?table="+result.getTableName());
         }
 
     }
