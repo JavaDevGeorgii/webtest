@@ -1,5 +1,8 @@
 package com.levelup.webtest.dao;
 
+import com.levelup.webtest.Constants;
+import com.levelup.webtest.model.User;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -99,5 +102,29 @@ public class DatabaseUtilBean {
             e.printStackTrace();
         }
 
+    }
+
+    public User login(String email, String password){
+        User user = null;
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(Constants.LOGIN_USER_QUERY);
+            stmt.setString(1,email);
+
+            ResultSet rs = stmt.executeQuery();
+
+
+            if (rs.next()){
+                user = new User();
+                user.fillUpFromResultSet(rs);
+
+                if (!user.getPassword().equals(password)){
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 }
