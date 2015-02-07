@@ -10,9 +10,10 @@
 <html>
 <head>
     <title>Login Page</title>
+    <script src="js/main.js"></script>
 </head>
 <body>
-<form action="login" method="post">
+<form action="auth" method="post">
 
     Email: <input type="text" name="<%=Constants.LOGIN_EMAIL_PARAMETER%>">
     Password: <input type="password" name="<%=Constants.LOGIN_PASSWORD_PARAMETER%>">
