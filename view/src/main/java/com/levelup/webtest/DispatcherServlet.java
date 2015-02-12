@@ -1,5 +1,6 @@
 package com.levelup.webtest;
 
+import com.levelup.dao.AccountRepository;
 import com.levelup.webtest.controllers.ControllerHolder;
 import com.levelup.webtest.controllers.ControllerIf;
 
@@ -26,6 +27,7 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        AccountRepository repository = new AccountRepository();
         String url = request.getRequestURI();
 //        String serverPart = request.getProtocol()+"://"+request.getServerName()+request.getServerPort()+request.getContextPath();
 //        String path = request.getContextPath();
