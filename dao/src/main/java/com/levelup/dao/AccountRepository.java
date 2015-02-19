@@ -5,22 +5,19 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
+import java.util.List;
+
 /**
  * Created by denis_zavadsky on 2/12/15.
  */
-public class AccountRepository {
+public interface AccountRepository {
 
-    private Session session;
+    Account getAccountById(Long id);
+    Account getAccountByNumber(String accountNumber);
+    List<Account> getAllAccounts();
 
-    public AccountRepository() {
-        SessionFactory sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
-        session = sessionFactory.openSession();
-
-    }
-
-    public Account getAccountById(Long id){
-        Account account = (Account) session.get(Account.class,1);
-        return account;
-    }
+    void createAccount(Account account);
+    void updateAccount(Account account);
+    void deleteAccount(Account account);
 
 }

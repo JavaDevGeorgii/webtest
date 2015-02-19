@@ -15,6 +15,7 @@
         <mapping class="com.levelup.model.Account" />
         <mapping class="com.levelup.model.Bank" />
         <mapping class="com.levelup.model.Customer" />
+        <mapping class="com.levelup.model.Transaction" />
 
     </session-factory>
 </hibernate-configuration>
