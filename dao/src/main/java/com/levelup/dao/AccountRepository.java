@@ -20,4 +20,8 @@ public interface AccountRepository {
     void updateAccount(Account account);
     void deleteAccount(Account account);
 
+    List<Account> getAccountsByBankId(Long id);
+    List<Account> getAccountsByBankName(String name);
+    List<Account> getAccountsByCustomerName(String firstName, String lastName);
+
 }

@@ -27,7 +27,7 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        AccountRepository repository = new AccountRepository();
+
         String url = request.getRequestURI();
 //        String serverPart = request.getProtocol()+"://"+request.getServerName()+request.getServerPort()+request.getContextPath();
 //        String path = request.getContextPath();

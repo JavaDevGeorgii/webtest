@@ -3,6 +3,8 @@ package com.levelup.dao.impl;
 import com.levelup.dao.AccountRepository;
 import com.levelup.dao.HibernateSessionProvider;
 import com.levelup.model.Account;
+import com.levelup.model.Bank;
+import com.levelup.model.Customer;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -56,6 +58,10 @@ public class AccountRepositoryImpl implements AccountRepository {
     public void createAccount(Account account) {
         Session session = HibernateSessionProvider.getSession();
         session.beginTransaction();
+        Bank bank = (Bank) session.get(Bank.class, account.getBank().getId());
+        Customer customer = (Customer) session.get(Customer.class, account.getCustomer().getId());
+        account.setBank(bank);
+        account.setCustomer(customer);
         session.persist(account);
         session.getTransaction().commit();
         session.close();
@@ -82,5 +88,37 @@ public class AccountRepositoryImpl implements AccountRepository {
         session.delete(account);
         session.getTransaction().commit();
         session.close();
+    }
+
+    @Override
+    public List<Account> getAccountsByBankId(Long id) {
+        Session session = HibernateSessionProvider.getSession();
+        session.beginTransaction();
+        Query query = session.createQuery("from Account as a where a.bank.id = :id");
+        query.setParameter("id",id);
+        List<Account> result = query.list();
+        return result;
+    }
+
+    @Override
+    public List<Account> getAccountsByBankName(String name) {
+        Session session = HibernateSessionProvider.getSession();
+        session.beginTransaction();
+        Query query = session.createQuery("from Account as a where a.bank.name = :name");
+        query.setParameter("name",name);
+        List<Account> result = query.list();
+        return result;
+    }
+
+    @Override
+    public List<Account> getAccountsByCustomerName(String firstName, String lastName) {
+        Session session = HibernateSessionProvider.getSession();
+        session.beginTransaction();
+        Query query = session.createQuery("from Account as a where a.customer.firstName like :firstName " +
+                "and a.customer.lastName like :lastName");
+        query.setParameter("firstName",firstName+"%");
+        query.setParameter("lastName",lastName+"%");
+        List<Account> result = query.list();
+        return result;
     }
 }

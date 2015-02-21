@@ -13,4 +13,11 @@ public class Constants {
 
 
     public final static String LOGIN_USER_QUERY = "SELECT * FROM User WHERE email = ?";
+
+    public final static String BANK_NAME_PARAMETER = "bankName";
+    public final static String FIRST_NAME_PARAMETER = "firstName";
+    public final static String LAST_NAME_PARAMETER = "lastName";
+    public final static String BIRTH_DATE_PARAMETER = "birthDate";
+    public final static String ACCOUNT_NUMBER_PARAMETER = "accountNumber";
+    public final static String ACCOUNT_BALANCE_PARAMETER = "accountBalance";
 }
