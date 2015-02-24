@@ -1,6 +1,7 @@
 package com.levelup.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -74,7 +75,7 @@ public class Account extends BusinessObject {
         this.bank = bank;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = Transaction.class, cascade={CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Transaction.class, cascade={CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "ACCOUNT_TRANSACTIONS", joinColumns = {@JoinColumn(name = "ACCOUNT_ID")},
             inverseJoinColumns = {@JoinColumn(name = "TRANSACTION_ID")})
     public List<Transaction> getTransactions() {
@@ -83,5 +84,13 @@ public class Account extends BusinessObject {
 
     public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
+    }
+
+    @Transient
+    public void addTransaction(Transaction transaction){
+        if (this.transactions == null){
+           this.transactions = new ArrayList<Transaction>();
+        }
+        this.transactions.add(transaction);
     }
 }

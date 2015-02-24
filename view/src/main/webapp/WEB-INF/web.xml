@@ -83,9 +83,21 @@
         <servlet-class>com.levelup.webtest.servlets.AccountServlet</servlet-class>
     </servlet>
 
+
+
+    <servlet>
+        <servlet-name>transactionServlet</servlet-name>
+        <servlet-class>com.levelup.webtest.servlets.TransactionServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>accountServlet</servlet-name>
         <url-pattern>/account</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>transactionServlet</servlet-name>
+        <url-pattern>/transaction</url-pattern>
     </servlet-mapping>
     
     <resource-ref>
