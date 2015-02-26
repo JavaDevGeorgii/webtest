@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - levelup1@localhost" uuid="6d22d1ad-a1a5-4a32-9e9a-43c7c015a3c6">
+    <database-info product="MySQL" version="5.6.23" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <schema name="" catalog="levelup1"/>
+    <table name="ACCOUNT" schema="" catalog="levelup1" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="accountNumber" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="balance" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <column name="bank_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="customer_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FKE49F160DB312B9FB" columns="customer_id" ref-table="CUSTOMER" ref-schema="" ref-catalog="levelup1" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FKE49F160DEC85DBB" columns="bank_id" ref-table="BANK" ref-schema="" ref-catalog="levelup1" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FKDE8FC247CBC4C579" table="ACCOUNT_TRANSACTIONS" schema="" catalog="levelup1" columns="ACCOUNT_ID"/>
+      <exported-key name="FK1EFE3CCBC4C579" table="BANK" schema="" catalog="levelup1" columns="account_id"/>
+      <index name="FKE49F160DB312B9FB" unique="false" columns="customer_id"/>
+      <index name="FKE49F160DEC85DBB" unique="false" columns="bank_id"/>
+    </table>
+    <table name="ACCOUNT_TRANSACTIONS" schema="" catalog="levelup1" type="TABLE">
+      <column name="ACCOUNT_ID" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="TRANSACTION_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="TRANSACTION_ID"/>
+      <foreign-key name="FKDE8FC2478F37B459" columns="TRANSACTION_ID" ref-table="TRANSACTION" ref-schema="" ref-catalog="levelup1" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FKDE8FC247CBC4C579" columns="ACCOUNT_ID" ref-table="ACCOUNT" ref-schema="" ref-catalog="levelup1" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FKDE8FC2478F37B459" unique="false" columns="TRANSACTION_ID"/>
+      <index name="FKDE8FC247CBC4C579" unique="false" columns="ACCOUNT_ID"/>
+    </table>
+    <table name="BANK" schema="" catalog="levelup1" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="account_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK1EFE3CCBC4C579" columns="account_id" ref-table="ACCOUNT" ref-schema="" ref-catalog="levelup1" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FKE49F160DEC85DBB" table="ACCOUNT" schema="" catalog="levelup1" columns="bank_id"/>
+      <index name="FK1EFE3CCBC4C579" unique="false" columns="account_id"/>
+    </table>
+    <table name="CUSTOMER" schema="" catalog="levelup1" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="birthDate" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="firstName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="lastName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FKE49F160DB312B9FB" table="ACCOUNT" schema="" catalog="levelup1" columns="customer_id"/>
+    </table>
+    <table name="TRANSACTION" schema="" catalog="levelup1" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="amount" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <column name="date" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FKDE8FC2478F37B459" table="ACCOUNT_TRANSACTIONS" schema="" catalog="levelup1" columns="TRANSACTION_ID"/>
+    </table>
+  </data-source>
+</component>

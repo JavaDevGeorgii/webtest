@@ -23,6 +23,7 @@ public class Transaction extends BusinessObject{
     public Transaction() {
     }
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column

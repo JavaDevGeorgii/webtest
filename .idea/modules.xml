@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/dao/dao.iml" filepath="$PROJECT_DIR$/dao/dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/view/src/main/main.iml" filepath="$PROJECT_DIR$/view/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/src/main/main1.iml" filepath="$PROJECT_DIR$/service/src/main/main1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dao/src/main/main2.iml" filepath="$PROJECT_DIR$/dao/src/main/main2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/model/src/main/main3.iml" filepath="$PROJECT_DIR$/model/src/main/main3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/model/model.iml" filepath="$PROJECT_DIR$/model/model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/service.iml" filepath="$PROJECT_DIR$/service/service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/view/view.iml" filepath="$PROJECT_DIR$/view/view.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webtest.iml" filepath="$PROJECT_DIR$/webtest.iml" />
+    </modules>
+  </component>
+</project>
