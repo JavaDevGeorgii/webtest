@@ -9,5 +9,10 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="main2" />
     <orderEntry type="module" module-name="main3" />
+    <orderEntry type="library" name="model-1.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="dao-1.0-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="main2" />
+    <orderEntry type="module" module-name="main3" />
   </component>
 </module>
